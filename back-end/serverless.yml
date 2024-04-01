@@ -1,0 +1,50 @@
+service: i4iProj1Rory
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+  create:
+    handler: todos/create.create
+    events:
+      - httpApi:
+          path: /todos
+          method: post
+
+  list:
+    handler: todos/list.list
+    events:
+      - httpApi:
+          path: /todos
+          method: get
+
+  get:
+    handler: todos/get.get
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: get
+
+  update:
+    handler: todos/update.update
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: put
+
+  delete:
+    handler: todos/delete.delete
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: delete
+  
