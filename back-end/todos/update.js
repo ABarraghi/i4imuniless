@@ -14,12 +14,13 @@ module.exports.update = async (event) => {
   });
 
   // UPDATE function
+  var tableName = event.pathParameters.tableName;
   var id = event.pathParameters.id;
   var updateColumn = event.pathParameters.updateColumn;
   var updateValue = event.pathParameters.updateValue;
   try {
     const [results, fields] = await connection.query(
-      'UPDATE acc_account SET ' + updateColumn + '=' + updateValue + ' WHERE id=' + id
+      'UPDATE '+tableName+' SET ' + updateColumn + '=' + updateValue + ' WHERE id=' + id
     );
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
