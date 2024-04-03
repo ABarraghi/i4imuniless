@@ -14,9 +14,10 @@ module.exports.list = async (event) => {
   });
 
   // A simple SELECT query
+  var tableName = event.pathParameters.tableName;
   try {
     const [results, fields] = await connection.query(
-      'SELECT * FROM acc_account'
+      'SELECT * FROM '+tableName
     );
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
