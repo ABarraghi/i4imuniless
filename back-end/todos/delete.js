@@ -13,12 +13,13 @@ module.exports.delete = async (event, context, callback) => {
     connectTimeout: 300000
   });
 
+  var tableName = event.pathParameters.tableName;
   var id = event.pathParameters.id;
   console.log(id);
   // DELETE function
   try {
     const [results, fields] = await connection.query(
-      'DELETE FROM acc_account WHERE id=' + id
+      'DELETE FROM '+tableName+' WHERE id=' + id
     );
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
