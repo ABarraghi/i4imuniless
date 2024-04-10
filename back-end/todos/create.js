@@ -14,13 +14,17 @@ module.exports.create = async (event, context, callback) => {
     connectTimeout: 300000
   });
 
+  var eventBody = JSON.parse(event.body); //Could change in axios
+
+  console.log(eventBody);
+
   var tableName = event.pathParameters.tableName;
-  var insertFields = event.pathParameters.insertFields;
-  var insertValues = event.pathParameters.insertValues;
+  var insertFields = eventBody.insertFields;
+  var insertValues = eventBody.insertValues;
   // CREATE function
   //can test with:
   //{
-  //"pathParameters":{"tableName":"acc_account","insertFields":"serviceaddress_id, suffix, name, namesearch, namesort","insertValues":"108, 0, 'Test Record', 'Test Record', 'Test Record'"}
+  //"body":{"tableName":"acc_account","insertFields":"serviceaddress_id, suffix, name, namesearch, namesort","insertValues":"108, 0, 'Test Record', 'Test Record', 'Test Record'"}
   //}
   try {
     const [results, fields] = await connection.query(

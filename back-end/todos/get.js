@@ -14,13 +14,12 @@ module.exports.get = async (event, context, callback) => {
   });
 
   var tableName = event.pathParameters.tableName;
-  var queryVar = event.pathParameters.queryVar;
-  var value = event.pathParameters.value;
+  var value = event.pathParameters.id;
   // A simple SELECT query
     //can use id number 98 to test - should return Tim Bush
   try {
     const [results, fields] = await connection.query(
-      'SELECT * FROM '+tableName+' WHERE ' + queryVar + '=' + value
+      'SELECT * FROM '+tableName+' WHERE id =' + value
     );
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
@@ -30,5 +29,4 @@ module.exports.get = async (event, context, callback) => {
   return {
     statusCode: 200 
   };
-};
 };

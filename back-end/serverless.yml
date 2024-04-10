@@ -17,34 +17,34 @@ functions:
     handler: todos/create.create
     events:
       - httpApi:
-          path: /todos
+          path: /todos/{tableName}
           method: post
 
   list:
     handler: todos/list.list
     events:
       - httpApi:
-          path: /todos
+          path: /todos/list/{tableName}
           method: get
 
   get:
     handler: todos/get.get
     events:
       - httpApi:
-          path: /todos/{id}
+          path: /todos/{tableName}/{id}
           method: get
 
   update:
     handler: todos/update.update
     events:
       - httpApi:
-          path: /todos/{id}
+          path: /todos/{tableName}/{id}
           method: put
 
   delete:
     handler: todos/delete.delete
     events:
       - httpApi:
-          path: /todos/{id}
+          path: /todos/{tableName}/{id}
           method: delete
   

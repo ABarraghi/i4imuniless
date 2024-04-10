@@ -13,11 +13,15 @@ module.exports.update = async (event) => {
     connectTimeout: 300000
   });
 
+  var eventBody = JSON.parse(event.body); //Could change in axios
+
+  console.log(eventBody);
+
   // UPDATE function
   var tableName = event.pathParameters.tableName;
   var id = event.pathParameters.id;
-  var updateColumn = event.pathParameters.updateColumn;
-  var updateValue = event.pathParameters.updateValue;
+  var updateColumn = eventBody.updateColumn;
+  var updateValue = eventBody.updateValue;
   try {
     const [results, fields] = await connection.query(
       'UPDATE '+tableName+' SET ' + updateColumn + '=' + updateValue + ' WHERE id=' + id
