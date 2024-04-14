@@ -2,8 +2,8 @@
     <div class="container mt-5">   
         <div class="card">
             <div class="card-header">
-                <h4>Student Lists
-                    <NuxtLink to="/students/create" class="btn btn-primary float-end">Add Student</NuxtLink>
+                <h4>Account Lists
+                    <NuxtLink to="/accounts/create" class="btn btn-primary float-end">Add Account</NuxtLink>
                 </h4>
             </div>
             <div class="card-body">
@@ -14,26 +14,17 @@
                     <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Course</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Created At</th>
-                            <th>Action</th>
+                            <th>Account Number</th>
+                            <th>Full Name</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(student, index) in students" :key="index">
-                            <td>{{ student.id }}</td>
-                            <td>{{ student.name }}</td>
-                            <td>{{ student.course }}</td>
-                            <td>{{ student.email }}</td>
-                            <td>{{ student.phone }}</td>
-                            <td>{{ student.created_at }}</td>
+                        <tr v-for="(account, index) in accounts" :key="index">
+                            <td>{{ `${account.serviceaddress_id}-${account.suffix}` }}</td>
+                            <td>{{ account.name }}</td>
                             <td>
-                                <NuxtLink :to="`/students/${student.id}`" class="btn btn-success btn-sm mx-2">Edit</NuxtLink>
-                                <button type="button" @click="deleteStudent($event, student.id)" class="btn btn-danger btn-sm mx-2">Delete</button>
+                                <NuxtLink :to="`/accounts/${account.id}`" class="btn btn-success btn-sm mx-2">Edit</NuxtLink>
+                                <button type="button" @click="deleteStudent($event, account.id)" class="btn btn-danger btn-sm mx-2">Delete</button>
                             </td>
                         </tr>
                     </tbody>
@@ -56,7 +47,7 @@ import axios from 'axios';
         name: "student",
         data() {
             return{
-                students: {},
+                accounts: {},
                 isLoading: true
             }
         },
@@ -72,10 +63,11 @@ import axios from 'axios';
 
                 this.isLoading = true;
 
-                axios.get(`http://localhost:8000/api/students`).then(res => {
+                axios.get(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/list/acc_account`).then(res => {
                     // console.log(res.data.students);
                     this.isLoading = false;
-                    this.students = res.data.students;
+                    this.accounts = res.data;
+                    console.log(res.data);
 
                 });
             },
