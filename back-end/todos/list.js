@@ -21,10 +21,16 @@ module.exports.list = async (event) => {
     );
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
+
+    return {
+      body: JSON.stringify(results),
+      headers: {
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Methods":"GET"
+      },
+      statusCode: 200
+    }
   } catch (err) {
     console.log(err);
   }
-  return {
-    statusCode: 200 
-  };
 };
