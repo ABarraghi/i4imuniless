@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "aws-sdk": "^2.1570.0",
-    "mysql2": "^3.9.2"
+    "mysql2": "^3.9.2",
+    "serverless-mysql": "^1.5.5"
   }
 }

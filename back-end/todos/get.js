@@ -1,28 +1,42 @@
 'use strict';
 
-var mysql = require('mysql2/promise');
+// var mysql = require('mysql2/promise');
+
+const mysql = require('serverless-mysql')({
+  config: {
+    host     : 'i4idb1.cqt6f5roexbb.us-east-1.rds.amazonaws.com',
+    database : 'i4iben',
+    user     : 'i4iben',
+    password : 'i4iben'
+  }
+})
 
 module.exports.get = async (event, context, callback) => {
   // Create the connection to database
-  const connection = await mysql.createConnection({
-    host: 'i4idb1.cqt6f5roexbb.us-east-1.rds.amazonaws.com',
-    user: 'i4iben', 
-    password: 'i4iben',
-    database: 'i4iben',
-    port: '3306',
-    connectTimeout: 500
-  });
+  // const connection = await mysql.createConnection({
+  //   host: 'i4idb1.cqt6f5roexbb.us-east-1.rds.amazonaws.com',
+  //   user: 'i4iben', 
+  //   password: 'i4iben',
+  //   database: 'i4iben',
+  //   port: '3306',
+  //   connectTimeout: 500
+  // });
 
   var tableName = event.pathParameters.tableName;
   var value = event.pathParameters.id;
   // A simple SELECT query
     //can use id number 98 to test - should return Tim Bush
   try {
-    const [results, fields] = await connection.query(
-      'SELECT * FROM '+tableName+' WHERE id =' + value
-    );
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    // const [results, fields] = await connection.query(
+    //   'SELECT * FROM '+tableName+' WHERE id =' + value
+    // );
+
+    let results = await mysql.query('SELECT * FROM '+tableName+' WHERE id =' + value);
+
+    console.log(JSON.stringify(results)); // results contains rows returned by server
+    // console.log(fields); // fields contains extra meta data about results, if available
+
+    await mysql.end();
 
     return {
       body: JSON.stringify(results),
