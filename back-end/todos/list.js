@@ -10,7 +10,7 @@ module.exports.list = async (event) => {
     password: 'i4iben',
     database: 'i4iben',
     port: '3306',
-    connectTimeout: 300000
+    connectTimeout: 5000
   });
 
   // A simple SELECT query
@@ -25,12 +25,13 @@ module.exports.list = async (event) => {
     return {
       body: JSON.stringify(results),
       headers: {
-        "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Methods":"GET"
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
       },
       statusCode: 200
     }
   } catch (err) {
     console.log(err);
   }
+
 };

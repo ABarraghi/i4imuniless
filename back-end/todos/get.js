@@ -10,7 +10,7 @@ module.exports.get = async (event, context, callback) => {
     password: 'i4iben',
     database: 'i4iben',
     port: '3306',
-    connectTimeout: 300000
+    connectTimeout: 500
   });
 
   var tableName = event.pathParameters.tableName;
@@ -27,12 +27,14 @@ module.exports.get = async (event, context, callback) => {
     return {
       body: JSON.stringify(results),
       headers: {
-        "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Methods":"GET"
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
       },
       statusCode: 200
     }
   } catch (err) {
     console.log(err);
   }
+
+
 };

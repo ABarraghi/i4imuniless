@@ -10,7 +10,7 @@ module.exports.update = async (event) => {
     password: 'i4iben',
     database: 'i4iben',
     port: '3306',
-    connectTimeout: 300000
+    connectTimeout: 5000
   });
 
   var eventBody = JSON.parse(event.body); //Could change in axios
@@ -31,7 +31,13 @@ module.exports.update = async (event) => {
   } catch (err) {
     console.log(err);
   }
+
   return {
-    statusCode: 200 
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    }
   };
+
 };
