@@ -15,18 +15,18 @@
                 <div v-else>
                     <form @submit.prevent="updateStudent">
                         <div class="mb-3">
-                            <label>Name</label>
-                            <input type="text" v-model="student.name" class="form-control"/>
+                            <label>Account Number</label>
+                            <input type="text" v-model="this.serviceaddress_id" class="form-control"/>
                             <span class="text-danger" v-if="this.errorList.name">{{ this.errorList.name[0] }}</span>
                         </div>
                         <div class="mb-3">
-                            <label>Course</label>
-                            <input type="text" v-model="student.course" class="form-control"/>
+                            <label>Name</label>
+                            <input type="text" v-model="student.name" class="form-control"/>
                             <span class="text-danger" v-if="this.errorList.course">{{ this.errorList.course[0] }}</span>
                         </div>
                         <div class="mb-3">
-                            <label>Email</label>
-                            <input type="text" v-model="student.email" class="form-control"/>
+                            <label>Address</label>
+                            <input type="text" v-model="student.service_add" class="form-control"/>
                             <span class="text-danger" v-if="this.errorList.email">{{ this.errorList.email[0] }}</span>
                         </div>
                         <div class="mb-3">
@@ -70,10 +70,15 @@ export default {
 
             this.isLoading = true;
 
-            axios.get(`http://localhost:8000/api/students/${studentId}/edit`).then(res => {
+            axios.get(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_account/${studentId}`).then(res => {
                 console.log(res);
-                this.student = res.data.student;
+                this.student = res.data[0];
+                axios.get(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_serviceaddress/${this.student.serviceaddress_id}`).then(res => {
+                                console.log(res.data[0]);
+                                this.student.service_add = `${res.data[0].streetname}, ${res.data[0].city} ${res.data[0].state} ${res.data[0].zip}`;
+                            });
                 this.isLoading = false;
+
             });
 
         },
@@ -84,7 +89,7 @@ export default {
             // alert('saving student...')
 
             var myThis = this;
-            axios.put(`http://localhost:8000/api/students/${this.studentId}/edit`,this.student).then(res => {
+            axios.put(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_account/${studentId}`,this.student).then(res => {
 
                 console.log(res, 'res');
                 alert(res.data.message);
