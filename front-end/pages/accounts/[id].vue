@@ -1,10 +1,10 @@
 <template>
     <div class="mt-5 container">
-        <h1>Edit Student Page</h1>
+        <h1>Edit Account Page</h1>
         <div class="card">
             <div class="card-header">
-                <h4>Edit Student
-                    <NuxtLink to="/students" class="btn btn-danger float-end">Back</NuxtLink>
+                <h4>Edit Account
+                    <NuxtLink to="/accounts" class="btn btn-danger float-end">Back</NuxtLink>
                 </h4>
             </div>
             <div class="card-body">

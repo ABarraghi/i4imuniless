@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>Add Student
-                    <NuxtLink to="/students" class="btn btn-danger float-end">Back</NuxtLink>
+                    <NuxtLink to="/accounts" class="btn btn-danger float-end">Back</NuxtLink>
                 </h4>
             </div>
             <div class="card-body">
