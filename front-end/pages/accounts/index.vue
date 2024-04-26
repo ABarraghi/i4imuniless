@@ -2,7 +2,7 @@
     <div class="container mt-5">   
         <div class="card">
             <div class="card-header">
-                <h4>Account Lists
+                <h4>Account List
                     <NuxtLink to="/accounts/create" class="btn btn-primary float-end">Add Account</NuxtLink>
                 </h4>
             </div>
