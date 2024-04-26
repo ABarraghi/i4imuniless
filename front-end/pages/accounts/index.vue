@@ -35,9 +35,6 @@
             </div>
         </div>
     </div>
-    <div>
-        <h4 id="aws-tester">Hello</h4>
-    </div>  
 </template>
 
 <script>
@@ -57,7 +54,6 @@ import axios from 'axios';
         mounted() {
 
             this.getAccounts();
-            this.testAWS();
 
         },
         methods: {
@@ -105,28 +101,17 @@ import axios from 'axios';
 
             deleteStudent(event, studentId){
 
-                if(confirm('Are you sure you want to delete this student?')){
+                if(confirm('Are you sure you want to delete this account?')){
 
                     event.target.innerText = "Deleting...";
 
-                    axios.delete(`http://localhost:8000/api/students/${studentId}/delete`).then(res => {
+                    axios.delete(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_account/${studentId}`).then(res => {
 
                         event.target.innerText = "Delete";
                         this.getAccounts();
                         
                     });
                 }
-
-            }, 
-
-            testAWS(){
-
-                axios.get(`https://m2elsjywa7.execute-api.us-east-1.amazonaws.com/`).then(res => {
-
-                    console.log(res);
-                    $("#aws-tester").html(res.data.name);
-
-                });
 
             }
 
