@@ -1,8 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  css: ['~/assets/main.scss'],
   app: {
     head: {
-      title: "NUXT 3 CRUD Application",
+      title: "MuniCRUD",
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

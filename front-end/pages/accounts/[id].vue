@@ -15,11 +15,6 @@
                 <div v-else>
                     <form @submit.prevent="updateStudent">
                         <div class="mb-3">
-                            <label>Account Service Address ID</label>
-                            <input type="text" v-model="student.serviceaddress_id" class="form-control"/>
-                            <span class="text-danger" v-if="this.errorList.name">{{ this.errorList.name[0] }}</span>
-                        </div>
-                        <div class="mb-3">
                             <label>Account Suffix</label>
                             <input type="text" v-model="student.suffix" class="form-control"/>
                             <span class="text-danger" v-if="this.errorList.name">{{ this.errorList.name[0] }}</span>
@@ -29,6 +24,25 @@
                             <input type="text" v-model="student.name" class="form-control"/>
                             <span class="text-danger" v-if="this.errorList.course">{{ this.errorList.course[0] }}</span>
                         </div>
+                        <div class="mb-3">
+                            <label>Account Service Address ID</label>
+
+                            <div class="dropdown">
+                            <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                {{ this.service_add.id }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="add in add_list"><a class="dropdown-item" @click="this.updateServiceAdd(add)">{{ add }}</a></li>
+                            </ul>
+                        </div>
+                        
+                        </div>
+
                         <div class="mb-3">
                             <label>Street</label>
                             <input type="text" v-model="service_add.streetname" class="form-control"/>
@@ -69,6 +83,7 @@ export default {
             studentId: '',
             student: {},
             service_add: {},
+            add_list: [],
             isLoading: false,
             isLoadingTitle: "Loading...",
             errorList: {}
@@ -78,6 +93,8 @@ export default {
         this.studentId = this.$route.params.id;
 
         this.getStudent(this.studentId);
+
+        this.getIdList();
     },
     methods: {
 
@@ -98,7 +115,29 @@ export default {
 
         },
 
-        
+        getIdList(){
+
+            axios.get(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/list/acc_serviceaddress`).then(res => {
+                
+                let adds = res.data;
+
+                for(let i = 0; i < adds.length; i++){
+                    this.add_list.push(adds[i].id);
+                }
+
+                console.log(this.add_list);
+
+            });
+
+        },
+
+        updateServiceAdd(serviceaddress_id){
+
+            axios.get(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_serviceaddress/${serviceaddress_id}`).then(res => {
+                                this.service_add = res.data[0]; 
+            });
+
+        },
 
         updateStudent() {
             this.isLoading = true;
