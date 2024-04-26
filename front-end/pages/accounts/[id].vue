@@ -134,7 +134,8 @@ export default {
         updateServiceAdd(serviceaddress_id){
 
             axios.get(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_serviceaddress/${serviceaddress_id}`).then(res => {
-                                this.service_add = res.data[0]; 
+                                this.service_add = res.data[0];
+                                this.student.serviceaddress_id = serviceaddress_id; 
             });
 
         },

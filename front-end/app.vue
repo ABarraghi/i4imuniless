@@ -5,7 +5,5 @@ import { NuxtPage } from '#build/components';
     <TheHeader />
 
     <NuxtPage />
-
-    <TheFooter />
   </div>
 </template>

@@ -108,19 +108,7 @@ export default {
             this.student.insertFields = "serviceaddress_id, suffix, name";
             this.student.insertValues = `'${this.student.serviceaddress_id}', '${this.student.suffix}', '${this.student.name}'`;
 
-            this.service_add.insertFields = "streetname, city, state, zip";
-            this.service_add.insertValues = `'${this.service_add.streetname}', '${this.service_add.city}', '${this.service_add.state}', '${this.service_add.state}'`;
-
-            var myThis = this;
-
-            axios.post(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_serviceaddress`,this.service_add).then(res => {
-
-            console.log(res, 'res');
-
-            this.service_add.streetname = '';
-            this.service_add.city = '';
-            this.service_add.state = '';
-            this.service_add.zip = '';
+            var myThis = this;            
 
             axios.post(`https://jsjdf7f5di.execute-api.us-east-1.amazonaws.com/todos/acc_account`,this.student).then(res => {
 
@@ -129,6 +117,11 @@ export default {
                 this.student.serviceaddress_id = '';
                 this.student.suffix = '';
                 this.student.name = '';
+
+                this.service_add.streetname = '';
+                this.service_add.city = '';
+                this.service_add.state = '';
+                this.service_add.zip = '';
 
                 this.isLoading = false;
                 this.isLoadingTitle = "Loading";
@@ -145,20 +138,6 @@ export default {
 
                 myThis.isLoading = false;
                 });
-
-            })
-            .catch(function (error) {
-            console.log(error, 'errors');
-
-            if(error.response){
-                if(error.response.status == 422){
-                    myThis.errorList = error.response.data.errors;
-                }
-            }
-
-            myThis.isLoading = false;
-            });
-
         },
 
         getIdList(){

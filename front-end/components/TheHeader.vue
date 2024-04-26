@@ -4,7 +4,7 @@ import { NuxtLink } from '#build/components';
     <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <NuxtLink class="navbar-brand" top="/">Navbar</NuxtLink>
+                <a href="#" class="navbar-left"><img src="../public/muni_link_logo.jpeg"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -14,13 +14,7 @@ import { NuxtLink } from '#build/components';
                         <NuxtLink class="nav-link" to="/accounts">View Accounts</NuxtLink>
                     </li>
                     <li class="nav-item">
-                        <NuxtLink class="nav-link" to="/">Home</NuxtLink>
-                    </li>
-                    <li class="nav-item">
-                        <NuxtLink class="nav-link" to="/about">About Us</NuxtLink>
-                    </li>
-                    <li class="nav-item">
-                        <NuxtLink class="nav-link" to="/contact">Contact Us</NuxtLink>
+                        <NuxtLink class="nav-link" to="/customers">View Customers</NuxtLink>
                     </li>
                 </ul>
                 </div>
